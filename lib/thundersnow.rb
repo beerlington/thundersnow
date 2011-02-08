@@ -7,7 +7,7 @@ class Thundersnow
       uri = URI.encode "http://www.google.com/ig/api?weather=#{location}"
       @xml = Nokogiri::XML(open(uri))
 
-      if @xml.xpath('//weather/problem_cause')
+      if @xml.xpath('//weather/problem_cause').size > 0
         return puts "Could not locate weather for #{location}"
       end
 
