@@ -1,18 +1,56 @@
-= thundersnow
+h1. thundersnow
 
-Description goes here.
+A Ruby based command-line utility for viewing the weather
 
-== Contributing to thundersnow
- 
-* Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
-* Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it
-* Fork the project
-* Start a feature/bugfix branch
-* Commit and push until you are happy with your contribution
-* Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
-* Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
+h2. About
 
-== Copyright
+Inspired by some recent "thundersnow":http://en.wikipedia.org/wiki/Thundersnow in New England, I decided to
+build a simple application to check the weather while I'm coding.
+
+h2. Installation
+
+Rubygem installation coming soon...
+
+h2. Usage
+
+<pre>
+thundersnow 05401
+</pre>
+
+<pre>
+thundersnow "burlington, vt"
+</pre>
+
+h2. Sample Output
+
+This is how the current output looks, better formatting is coming.
+
+<pre>
+Weather forecast for Burlington, VT
+-------------------------
+Snow Showers
+33F / 1C
+Wind: S at 3 mph
+Humidity: 97%
+-------------------------
+Forecast for Mon
+High: 35F / Low: 20F
+Conditions: Snow
+-------------------------
+Forecast for Tue
+High: 22F / Low: 4F
+Conditions: Snow
+-------------------------
+Forecast for Wed
+High: 22F / Low: 5F
+Conditions: Snow Showers
+-------------------------
+Forecast for Thu
+High: 18F / Low: 5F
+Conditions: Partly Cloudy
+</pre>
+
+h2. Copyright
 
 Copyright (c) 2011 Peter Brown. See LICENSE.txt for
 further details.
