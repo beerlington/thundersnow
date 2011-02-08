@@ -16,7 +16,7 @@ Jeweler::Tasks.new do |gem|
   gem.homepage = "http://github.com/beerlington/thundersnow"
   gem.license = "MIT"
   gem.summary = %Q{Ruby based command-line utility for viewing the weather}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.description = %Q{Check the weather without leaving your terminal. Uses Google's weather API to provide current conditions and forecast weather information.}
   gem.email = "github@lette.us"
   gem.authors = ["Peter Brown"]
   # Include your dependencies below. Runtime dependencies are required when using your gem,
