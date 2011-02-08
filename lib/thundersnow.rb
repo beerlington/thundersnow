@@ -4,7 +4,12 @@ require 'open-uri'
 class Thundersnow
   class << self
     def run(location)
-      @xml = Nokogiri::XML(open("http://www.google.com/ig/api?weather=#{location}"))
+      uri = URI.encode "http://www.google.com/ig/api?weather=#{location}"
+      @xml = Nokogiri::XML(open(uri))
+
+      if @xml.xpath('//weather/problem_cause')
+        return puts "Could not locate weather for #{location}"
+      end
 
       show :city
       puts "-------------------------"
