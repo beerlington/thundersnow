@@ -19,6 +19,7 @@ Jeweler::Tasks.new do |gem|
   gem.description = %Q{Check the weather without leaving your terminal. Uses Google's weather API to provide current conditions and forecast weather information.}
   gem.email = "github@lette.us"
   gem.authors = ["Peter Brown"]
+  gem.executables = ["thundersnow"]
   # Include your dependencies below. Runtime dependencies are required when using your gem,
   # and development dependencies are only needed for development (ie running rake tasks, tests, etc)
   #  gem.add_runtime_dependency 'jabber4r', '> 0.1'
