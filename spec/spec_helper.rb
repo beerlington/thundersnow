@@ -24,3 +24,10 @@ XML = '<?xml version="1.0"?>
 <low data="5"/><high data="22"/><icon data="/ig/images/weather/snow.gif"/><condition data="Snow Showers"/></forecast_conditions><forecast_conditions>
 <day_of_week data="Thu"/><low data="5"/><high data="18"/><icon data="/ig/images/weather/partly_cloudy.gif"/><condition data="Partly Cloudy"/>
 </forecast_conditions></weather></xml_api_reply>'
+
+
+BAD_XML = '<?xml version="1.0"?>
+<xml_api_reply version="1">
+<weather module_id="0" tab_id="0" mobile_row="0" mobile_zipped="1" row="0" section="0" >
+<problem_cause data=""/>
+</weather></xml_api_reply>'
