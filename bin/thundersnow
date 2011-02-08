@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+
+$LOAD_PATH.unshift File.join(File.dirname(__FILE__), '..', 'lib')
+require 'thundersnow'
+
+if ARGV.size == 0
+  puts 'Thundersnow Usage:'
+  puts 'Get weather for a zipcode: thundersnow 05401'
+  puts 'Get weather for a city, state: thundersnow "burlington, vt"'
+else
+  Thundersnow.run ARGV[0]
+end
