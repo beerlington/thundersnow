@@ -3,6 +3,7 @@ GEM
   specs:
     diff-lcs (1.1.2)
     git (1.2.5)
+    htmlentities (4.2.4)
     jeweler (1.5.2)
       bundler (~> 1.0.0)
       git (>= 1.2.5)
@@ -24,6 +25,7 @@ PLATFORMS
 
 DEPENDENCIES
   bundler (~> 1.0.0)
+  htmlentities
   jeweler (~> 1.5.2)
   nokogiri (~> 1.0)
   rcov
