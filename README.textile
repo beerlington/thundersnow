@@ -2,52 +2,62 @@ h1. thundersnow
 
 A Ruby based command-line utility for viewing the weather
 
-h2. About
-
-Inspired by some recent "thundersnow":http://en.wikipedia.org/wiki/Thundersnow in New England, I decided to
-build a simple application to check the weather while I'm coding.
-
 h2. Installation
 
-Rubygem installation coming soon...
+<pre>
+gem install thundersnow
+</pre>
 
 h2. Usage
 
-<pre>
-thundersnow 05401
-</pre>
+h3. Current Conditions:
+
+Specify zipcode or location in quotes:
 
 <pre>
+thundersnow 05401
 thundersnow "burlington, vt"
 </pre>
 
-h2. Sample Output
-
-This is how the current output looks, better formatting is coming.
+Output:
 
 <pre>
-Weather forecast for Burlington, VT
+Current Conditions for Burlington, VT
+Clear
+8°F / -13°C
+Wind: NW at 19 mph
+Humidity: 56%
+</pre>
+
+
+h3. Forecast Conditions:
+
+Use the @--forecast@ option to see a 4-day forecast
+
+<pre>
+thundersnow 05408 --forecast
+</pre>
+
+Output:
+
+<pre>
+Weather Forecast for Burlington, VT
+Forecast for Today
+High: 34°F / Low: 4°F
+Conditions: Scattered Snow Showers
 -------------------------
-Snow Showers
-33F / 1C
-Wind: S at 3 mph
-Humidity: 97%
--------------------------
-Forecast for Mon
-High: 35F / Low: 20F
-Conditions: Snow
--------------------------
-Forecast for Tue
-High: 22F / Low: 4F
-Conditions: Snow
--------------------------
-Forecast for Wed
-High: 22F / Low: 5F
+Forecast for Tomorrow
+High: 23°F / Low: 5°F
 Conditions: Snow Showers
 -------------------------
 Forecast for Thu
-High: 18F / Low: 5F
+High: 16°F / Low: 7°F
+Conditions: Snow Showers
+-------------------------
+Forecast for Fri
+High: 21°F / Low: 16°F
 Conditions: Partly Cloudy
+-------------------------
 </pre>
 
 h2. Copyright
