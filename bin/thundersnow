@@ -8,5 +8,5 @@ if ARGV.size == 0
   puts 'Get weather for a zipcode: thundersnow 05401'
   puts 'Get weather for a city, state: thundersnow "burlington, vt"'
 else
-  Thundersnow.run ARGV[0]
+  Thundersnow.run ARGV
 end

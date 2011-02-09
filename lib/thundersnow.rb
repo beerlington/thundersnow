@@ -1,9 +1,14 @@
 require 'nokogiri'
 require 'open-uri'
+require 'htmlentities'
 
 class Thundersnow
   class << self
-    def run(location)
+    def run(args)
+      @args = args
+
+      location = args.reject {|a| a =~ /^--/ }[0]
+
       uri = URI.encode "http://www.google.com/ig/api?weather=#{location}"
       @xml = Nokogiri::XML(open(uri))
 
@@ -12,14 +17,11 @@ class Thundersnow
         return puts "Could not locate weather for #{location}"
       end
 
-      show :city
-      puts "-------------------------"
-      show :condition
-      show :temperatures
-      show :wind
-      show :humidity
-      puts "-------------------------"
-      show :forecast
+      if show_forecast?
+        show :forecast
+      else
+        show :current
+      end
     end
 
   private
@@ -28,9 +30,21 @@ class Thundersnow
       puts send(name)
     end
 
+    def show_forecast?
+      @args.detect {|a| a == '--forecast' }
+    end
+
     def city
-      city = read_attr(@xml, '//forecast_information/city')
-      "Weather forecast for #{city}"
+      @city ||= read_attr(@xml, '//forecast_information/city')
+    end
+
+    def current
+      values = ["Current Conditions for #{city}"]
+      values << condition
+      values << temperatures
+      values << wind
+      values << humidity
+      values.join("\n")
     end
 
     def condition
@@ -50,11 +64,15 @@ class Thundersnow
     end
 
     def temp_f
-      read_attr(current_conditions, 'temp_f').to_s + 'F'
+      read_attr(current_conditions, 'temp_f').to_s + deg_symbol + "F"
     end
 
     def temp_c
-      read_attr(current_conditions, 'temp_c').to_s + 'C'
+      read_attr(current_conditions, 'temp_c').to_s + deg_symbol + 'C'
+    end
+
+    def deg_symbol
+      HTMLEntities.new.decode("&deg;")
     end
 
     def current_conditions
@@ -62,16 +80,35 @@ class Thundersnow
     end
 
     def forecast
-      @xml.xpath('//forecast_conditions').map do |day|
-        "Forecast for #{read_attr(day, 'day_of_week')} \n" +
-        "High: #{read_attr(day, 'high')}F / Low: #{read_attr(day, 'low')}F \n" +
-        "Conditions: #{read_attr(day, 'condition')} \n" +
-        "-------------------------\n"
+      values = ["Weather Forecast for #{city}"]
+
+      @xml.xpath('//forecast_conditions').each do |day|
+        day_of_week = read_attr(day, 'day_of_week')
+        values << "Forecast for #{readable_day(day_of_week)}"
+        values << "High: #{read_attr(day, 'high')+deg_symbol}F / Low: #{read_attr(day, 'low')+deg_symbol}F"
+        values << "Conditions: #{read_attr(day, 'condition')}"
+        values << "-------------------------"
       end
+
+      values.join("\n")
+    end
+
+    def readable_day(day_of_week)
+      return "Today" if day_of_week == today
+      return "Tomorrow" if day_of_week == tomorrow
+      day_of_week
+    end
+
+    def today
+      Time.now.strftime('%a')
+    end
+
+    def tomorrow
+      (Time.now + 86400).strftime('%a')
     end
 
     def read_attr(root, node)
-      root.xpath(node).attribute('data')
+      root.xpath(node).attribute('data').to_s
     end
   end
 

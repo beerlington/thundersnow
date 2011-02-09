@@ -1,49 +1,80 @@
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
-describe "Thundersnow w/ valid location" do
+describe Thundersnow do
   before do
     Thundersnow.stub(:open).and_return(XML)
+    Thundersnow.stub(:show).and_return(true)
   end
 
-  context "when running" do
+  context "for current conditions" do
     before do
-      Thundersnow.stub(:show).and_return(true)
+      @args = [ZIP]
     end
 
-    it "should set the @xml instance variable" do
-      Thundersnow.run ZIP
-      Thundersnow.instance_variable_get('@xml').to_s.should == Nokogiri::XML(XML).to_s
-    end
+    context "when running" do
 
-    [:city, :condition, :temperatures, :wind, :humidity, :forecast].each do |node|
-      it "should show the #{node}" do
-        Thundersnow.should_receive(:show).with(node).once
-        Thundersnow.run ZIP
+      it "should set the @xml instance variable" do
+        Thundersnow.run @args
+        Thundersnow.instance_variable_get('@xml').to_s.should == Nokogiri::XML(XML).to_s
+      end
+
+      it "should show the current conditions" do
+        Thundersnow.should_receive(:show).with(:current).once
+        Thundersnow.run @args
+      end
+
+      it "should not show the forecast conditions" do
+        Thundersnow.should_not_receive(:show).with(:forecast)
+        Thundersnow.run @args
       end
     end
   end
-end
 
-describe "Thundersnow w/ invalid location" do
-  before do
-    Thundersnow.stub(:open).and_return(BAD_XML)
+  context "for forecast conditions" do
+    before do
+      @args = [ZIP, '--forecast']
+    end
+
+    context "when running" do
+
+      it "should set the @xml instance variable" do
+        Thundersnow.run @args
+        Thundersnow.instance_variable_get('@xml').to_s.should == Nokogiri::XML(XML).to_s
+      end
+
+      it "should show the forecast conditions" do
+        Thundersnow.should_receive(:show).with(:forecast).once
+        Thundersnow.run @args
+      end
+
+      it "should not show the current conditions" do
+        Thundersnow.should_not_receive(:show).with(:current)
+        Thundersnow.run @args
+      end
+    end
   end
 
-  context "when running" do
+  context "w/ invalid location" do
     before do
-      Thundersnow.stub(:show).and_return(true)
+      Thundersnow.stub(:open).and_return(BAD_XML)
     end
 
-    it "should set the @xml instance variable" do
-      Thundersnow.run ZIP
-      Thundersnow.instance_variable_get('@xml').to_s.should == Nokogiri::XML(BAD_XML).to_s
-    end
+    context "when running" do
+      before do
+        Thundersnow.stub(:show).and_return(true)
+        @args = [ZIP]
+      end
 
-    [:city, :condition, :temperatures, :wind, :humidity, :forecast].each do |node|
-      it "should return and not show the #{node}" do
+      it "should set the @xml instance variable" do
+        Thundersnow.run @args
+        Thundersnow.instance_variable_get('@xml').to_s.should == Nokogiri::XML(BAD_XML).to_s
+      end
+
+      it "should return and not show anything" do
         Thundersnow.should_not_receive(:show)
-        Thundersnow.run ZIP
+        Thundersnow.run @args
       end
     end
   end
+
 end
