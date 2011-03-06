@@ -27,7 +27,7 @@ class Thundersnow
   private
 
     def show(name)
-      puts send(name)
+      puts "\e[32m#{send(name)}\e[0m"
     end
 
     def show_forecast?
