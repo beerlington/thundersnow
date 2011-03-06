@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{thundersnow}
-  s.version = "0.1.0"
+  s.version = "0.2.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Peter Brown"]
-  s.date = %q{2011-02-08}
+  s.date = %q{2011-03-06}
   s.default_executable = %q{thundersnow}
   s.description = %q{Check the weather without leaving your terminal. Uses Google's weather API to provide current conditions and forecast weather information.}
   s.email = %q{github@lette.us}
@@ -30,12 +30,13 @@ Gem::Specification.new do |s|
     "bin/thundersnow",
     "lib/thundersnow.rb",
     "spec/spec_helper.rb",
-    "spec/thundersnow_spec.rb"
+    "spec/thundersnow_spec.rb",
+    "thundersnow.gemspec"
   ]
   s.homepage = %q{http://github.com/beerlington/thundersnow}
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.5.0}
+  s.rubygems_version = %q{1.6.1}
   s.summary = %q{Ruby based command-line utility for viewing the weather}
   s.test_files = [
     "spec/spec_helper.rb",
