@@ -5,15 +5,14 @@
 
 Gem::Specification.new do |s|
   s.name = %q{thundersnow}
-  s.version = "0.2.0"
+  s.version = "0.3.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Peter Brown"]
-  s.date = %q{2011-03-06}
-  s.default_executable = %q{thundersnow}
+  s.authors = [%q{Peter Brown}]
+  s.date = %q{2011-06-26}
   s.description = %q{Check the weather without leaving your terminal. Uses Google's weather API to provide current conditions and forecast weather information.}
   s.email = %q{github@lette.us}
-  s.executables = ["thundersnow"]
+  s.executables = [%q{thundersnow}]
   s.extra_rdoc_files = [
     "LICENSE.txt",
     "README.textile"
@@ -29,19 +28,20 @@ Gem::Specification.new do |s|
     "VERSION",
     "bin/thundersnow",
     "lib/thundersnow.rb",
+    "lib/thundersnow/bin.rb",
+    "lib/thundersnow/weather.rb",
     "spec/spec_helper.rb",
-    "spec/thundersnow_spec.rb",
+    "spec/support/bad_response.xml",
+    "spec/support/ok_response.xml",
+    "spec/thundersnow/bin_spec.rb",
+    "spec/thundersnow/weather_spec.rb",
     "thundersnow.gemspec"
   ]
   s.homepage = %q{http://github.com/beerlington/thundersnow}
-  s.licenses = ["MIT"]
-  s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.6.1}
+  s.licenses = [%q{MIT}]
+  s.require_paths = [%q{lib}]
+  s.rubygems_version = %q{1.8.5}
   s.summary = %q{Ruby based command-line utility for viewing the weather}
-  s.test_files = [
-    "spec/spec_helper.rb",
-    "spec/thundersnow_spec.rb"
-  ]
 
   if s.respond_to? :specification_version then
     s.specification_version = 3
@@ -49,34 +49,31 @@ Gem::Specification.new do |s|
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<nokogiri>, ["~> 1.0"])
       s.add_runtime_dependency(%q<htmlentities>, [">= 0"])
-      s.add_development_dependency(%q<rspec>, ["~> 2.3.0"])
+      s.add_development_dependency(%q<rspec>, ["~> 2.6.0"])
+      s.add_development_dependency(%q<ruby-debug>, [">= 0"])
       s.add_development_dependency(%q<bundler>, ["~> 1.0.0"])
-      s.add_development_dependency(%q<jeweler>, ["~> 1.5.2"])
+      s.add_development_dependency(%q<jeweler>, ["~> 1.6.2"])
       s.add_development_dependency(%q<rcov>, [">= 0"])
-      s.add_runtime_dependency(%q<nokogiri>, ["~> 1.0"])
-      s.add_runtime_dependency(%q<htmlentities>, [">= 0"])
-      s.add_development_dependency(%q<rspec>, ["~> 2.3.0"])
+      s.add_development_dependency(%q<fakeweb>, ["~> 1.3.0"])
     else
       s.add_dependency(%q<nokogiri>, ["~> 1.0"])
       s.add_dependency(%q<htmlentities>, [">= 0"])
-      s.add_dependency(%q<rspec>, ["~> 2.3.0"])
+      s.add_dependency(%q<rspec>, ["~> 2.6.0"])
+      s.add_dependency(%q<ruby-debug>, [">= 0"])
       s.add_dependency(%q<bundler>, ["~> 1.0.0"])
-      s.add_dependency(%q<jeweler>, ["~> 1.5.2"])
+      s.add_dependency(%q<jeweler>, ["~> 1.6.2"])
       s.add_dependency(%q<rcov>, [">= 0"])
-      s.add_dependency(%q<nokogiri>, ["~> 1.0"])
-      s.add_dependency(%q<htmlentities>, [">= 0"])
-      s.add_dependency(%q<rspec>, ["~> 2.3.0"])
+      s.add_dependency(%q<fakeweb>, ["~> 1.3.0"])
     end
   else
     s.add_dependency(%q<nokogiri>, ["~> 1.0"])
     s.add_dependency(%q<htmlentities>, [">= 0"])
-    s.add_dependency(%q<rspec>, ["~> 2.3.0"])
+    s.add_dependency(%q<rspec>, ["~> 2.6.0"])
+    s.add_dependency(%q<ruby-debug>, [">= 0"])
     s.add_dependency(%q<bundler>, ["~> 1.0.0"])
-    s.add_dependency(%q<jeweler>, ["~> 1.5.2"])
+    s.add_dependency(%q<jeweler>, ["~> 1.6.2"])
     s.add_dependency(%q<rcov>, [">= 0"])
-    s.add_dependency(%q<nokogiri>, ["~> 1.0"])
-    s.add_dependency(%q<htmlentities>, [">= 0"])
-    s.add_dependency(%q<rspec>, ["~> 2.3.0"])
+    s.add_dependency(%q<fakeweb>, ["~> 1.3.0"])
   end
 end
 
