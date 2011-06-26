@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 require 'rubygems'
 require 'bundler'
 begin
@@ -20,9 +22,6 @@ Jeweler::Tasks.new do |gem|
   gem.email = "github@lette.us"
   gem.authors = ["Peter Brown"]
   gem.executables = ["thundersnow"]
-  gem.add_runtime_dependency 'nokogiri', '~> 1.0'
-  gem.add_runtime_dependency 'htmlentities'
-  gem.add_development_dependency "rspec", "~> 2.3.0"
 end
 Jeweler::RubygemsDotOrgTasks.new
 
