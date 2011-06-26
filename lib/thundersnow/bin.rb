@@ -1,13 +1,14 @@
 module Thundersnow
   class Bin
-    def self.run(args)
+
+    def initialize(args)
       @args = args
+    end
 
-      location = args.reject {|a| a =~ /^--/ }[0]
+    def run
+      @weather = Weather.new(location)
 
-      @weather = Weather.new(@args)
-
-      return puts "Could not locate weather for #{location}" unless @weather.valid?
+      return "Could not locate weather for #{location}" unless @weather.valid?
 
       if show_forecast?
         show :forecast
@@ -18,12 +19,16 @@ module Thundersnow
 
   private
 
-    def self.show(name)
-      puts "\e[32m#{@weather.send(name)}\e[0m"
+    def location
+      @args.reject {|a| a =~ /^--/ }[0]
     end
 
-    def self.show_forecast?
-      @args.detect {|a| a == '--forecast' }
+    def show(name)
+      @weather.send(name)
+    end
+
+    def show_forecast?
+      @args.include? '--forecast'
     end
 
   end

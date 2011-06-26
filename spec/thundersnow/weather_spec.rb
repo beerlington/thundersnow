@@ -32,5 +32,4 @@ describe 'Weather' do
     its(:forecast) { should_not be_empty }
   end
 
-
 end

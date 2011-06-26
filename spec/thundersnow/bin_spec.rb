@@ -10,23 +10,25 @@ describe 'Bin' do
 
     context 'w/out --forecast option' do
       before do
-        @args = ['05408']
+        args = ['05408']
+        @thundersnow = Thundersnow::Bin.new(args)
       end
 
       it 'should show the current conditions' do
-        Thundersnow::Bin.should_receive(:show).with(:current)
-        Thundersnow::Bin.run @args
+        @thundersnow.should_receive(:show).with(:current)
+        @thundersnow.run
       end
     end
 
     context 'with --forecast' do
       before do
-        @args = ['05408', '--forecast']
+        args = ['05408', '--forecast']
+        @thundersnow = Thundersnow::Bin.new(args)
       end
 
       it 'should show the forecast conditions' do
-        Thundersnow::Bin.should_receive(:show).with(:forecast)
-        Thundersnow::Bin.run @args
+        @thundersnow.should_receive(:show).with(:forecast)
+        @thundersnow.run
       end
     end
   end
@@ -35,11 +37,13 @@ describe 'Bin' do
     before do
       weather = mock(:weather, :valid? => false)
       Thundersnow::Weather.stub(:new).and_return(weather)
+      args = ['05408']
+      @thundersnow = Thundersnow::Bin.new(args)
     end
 
     it 'should return without displaying the weather' do
-      Thundersnow::Bin.should_not_receive(:show)
-      Thundersnow::Bin.run ['05408']
+      @thundersnow.should_not_receive(:show)
+      @thundersnow.run
     end
   end
 end

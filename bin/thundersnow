@@ -8,5 +8,7 @@ if ARGV.size == 0
   puts 'Get weather for a zipcode: thundersnow 05401'
   puts 'Get weather for a city, state: thundersnow "burlington, vt"'
 else
-  Thundersnow::Bin.run ARGV
+  thundersnow = Thundersnow::Bin.new ARGV
+  output = thundersnow.run
+  puts "\e[32m#{output}\e[0m"
 end
